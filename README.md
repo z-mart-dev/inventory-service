@@ -1,4 +1,4 @@
-#inventory-service
+# inventory-service
 This is the inventory microservice for the Z-Mart ZIO Reference application.
 
 Its currently a work in progress but aims to demonstrate:

@@ -1,0 +1,33 @@
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "username": "Foobar",
+  "password": "rabooF"
+}
+
+> {%
+client.global.set("auth_token", response.body);
+%}
+
+###
+
+POST http://localhost:8080/items
+Content-Type: application/json
+Origin: http://localhost:8080
+Authorization: Bearer {{auth_token}}
+
+{
+  "name" : "Chainsaw",
+  "description" : "This is my ....buzz stick?",
+  "price" : 59.99
+}
+
+###
+
+GET http://localhost:8080/items
+Accept: application/json
+Origin: http://localhost:8080
+Authorization: Bearer {{auth_token}}
+
+###
