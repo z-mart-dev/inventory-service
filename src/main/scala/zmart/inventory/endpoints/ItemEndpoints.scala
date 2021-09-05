@@ -1,0 +1,44 @@
+package zmart.inventory.endpoints
+
+import pdi.jwt.JwtClaim
+import zhttp.http._
+import zio.Has
+import zio.console._
+import zio.json._
+import zio.zmx.metrics.MetricsSyntax
+import zmart.fw.db.NotFoundException
+import zmart.fw.json._
+import zmart.inventory.services.{CreateItemRequest, ItemService}
+import zmart.zmx.ServiceMetrics
+
+object ItemEndpoints {
+
+  val item: JwtClaim => Http[Has[ItemService] with Console, HttpError, Request, UResponse] = jwtClaim =>
+    Http
+      .collectM[Request] {
+        case Method.GET -> Root / "items"        =>
+          (for {
+            _     <- putStrLn(s"Validated claim: $jwtClaim")
+            items <- ItemService.all
+          } yield Response.jsonString(items.toJson)) @@ ServiceMetrics.durationsList
+        case Method.GET -> Root / "items" / id   =>
+          for {
+            _    <- putStrLn(s"Validated claim: $jwtClaim")
+            item <- ItemService.get(id.toInt)
+          } yield Response.jsonString(item.toJson)
+        case req @ Method.POST -> Root / "items" =>
+          for {
+            _       <- putStrLn(s"Validated claim: $jwtClaim")
+            request <- extractBodyFromJson[CreateItemRequest](req)
+            results <- ItemService.create(request)
+          } yield Response.jsonString(results.toJson)
+      }
+      .catchAll {
+        case NotFoundException(msg, id) =>
+          Http.fail(HttpError.NotFound(Root / "items" / id.toString))
+        case ex: Throwable              =>
+          Http.fail(HttpError.InternalServerError(msg = ex.getMessage, cause = Option(ex)))
+        case err                        => Http.fail(HttpError.InternalServerError(msg = err.toString))
+      }
+
+}
