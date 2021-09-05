@@ -10,6 +10,6 @@ Its currently a work in progress but aims to demonstrate:
 - How to use `zio-magic` to manage your ZLayers in ZIO 1.x applications
 - How to use `zio-json`
 - How to use ZMX to track and explose metrics to Prometheus
-- How to use `zio-loggins`
+- How to use `zio-logging`
 - How to use Chimney to help transform case classes from one structure to another
 - How to use `zio-config`
