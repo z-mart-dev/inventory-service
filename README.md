@@ -13,3 +13,12 @@ Its currently a work in progress but aims to demonstrate:
 - How to use `zio-logging`
 - How to use Chimney to help transform case classes from one structure to another
 - How to use `zio-config`
+
+## Running the Service
+To run the service you will need Docker installed.  
+
+First get the database up and running.  Running `docker-compose up database -d` in the root of the project directory will start the db for you.
+
+Then you'll want to execute the `zmart.inventory.startup.Main` class to fire up the RESTful inventory service.
+
+You can use the http clients in `http-client/inventory` to execute various sample calls against the service to validate that things are setup properly.
