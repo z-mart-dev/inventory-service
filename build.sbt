@@ -1,6 +1,6 @@
-ThisBuild / scalaVersion     := "2.13.6"
-ThisBuild / version          := "0.1.0-SNAPSHOT"
-ThisBuild / organization     := "com.example"
+ThisBuild / scalaVersion := "2.13.6"
+ThisBuild / version := "0.1.0-SNAPSHOT"
+ThisBuild / organization := "com.example"
 ThisBuild / organizationName := "example"
 
 resolvers += "Sonatype OSS Snapshots" at "https://s01.oss.sonatype.org/content/repositories/snapshots"
@@ -15,7 +15,7 @@ val zioJsonVersion    = "0.2.0-M1"
 val zioOpticsVersion  = "0.1.0"
 val zioSchemaVersion  = "0.0.5"
 val zQueryVersion     = "0.2.9"
-val quillVersion      = "3.9.0"
+val quillVersion      = "3.10.0"
 val flywayVersion     = "7.9.1"
 val zioConfigVersion  = "1.0.5"
 val tapirVersion      = "0.19.0-M7"
@@ -37,7 +37,7 @@ libraryDependencies ++= Seq(
 //  "dev.zio"                       %% "zio-schema"               % zioSchemaVersion,
   "dev.zio"                       %% "zio-zmx"                  % zmxVersion,
   "io.github.kitlangton"          %% "zio-magic"                % zioMagicVersion,
-//  "io.d11"                        %% "zhttp"                    % zioHttpVersion,
+  "io.d11"                        %% "zhttp"                    % zioHttpVersion,
   "io.getquill"                   %% "quill-jdbc-zio"           % quillVersion,
   "org.flywaydb"                   % "flyway-core"              % flywayVersion,
   "com.softwaremill.sttp.tapir"   %% "tapir-zio"                % tapirVersion,

@@ -28,6 +28,11 @@ Authorization: Bearer {{auth_token}}
 GET http://localhost:8080/items
 Accept: application/json
 Origin: http://localhost:8080
-Authorization: Bearer {{auth_token}}
 
 ###
+
+GET http://localhost:8080/metrics
+
+###
+
+GET http://localhost:8080/docs
